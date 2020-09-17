@@ -87,3 +87,93 @@ function error(message: string): never {
 let someValue: any = "1"
 let stringLength: number = (<string>someValue).length
 console.log(stringLength, typeof stringLength)
+
+// ts的结构
+let arraaa = [1, 2]
+let [first, second] = arraaa
+console.log(first, second)
+let testobj = {
+  a: 1,
+  b: '2'
+}
+function testhg([a, b]: [number, number]) {
+  console.log(a, b)
+}
+// testhg(arraaa)
+
+// 接口
+// 这只是一个函数的参数传递
+function printLabel(labelObj: { label: string }) {
+  console.log(labelObj)
+}
+let myObj = { size: 10, label: 'ts的接口' }
+printLabel(myObj)
+// 这里才是接口
+interface LabelValue {
+  label: string
+}
+/*  LabelledValue接口就好比一个名字，用来描述上面例子里的要求。 它代表了有一个 label属性且类型为string的对象。 
+ 需要注意的是，我们在这里并不能像在其它语言里一样，说传给 printLabel的对象实现了这个接口。我们只会去关注值的外形。
+  只要传入的对象满足上面提到的必要条件，那么它就是被允许的。**/
+
+function printLabel2(labelObj: LabelValue) {
+  console.log(labelObj)
+}
+let myObj2 = { size: 10, label: 'ts的接口' }
+printLabel2(myObj2)
+// 接口的可选属性
+interface SquareConfig {
+  color?: string,
+  width?: number
+}
+// function creatSquare(config: SquareConfig) {
+//   console.log(config)
+// }
+// creatSquare({})
+function creatSquare(config: SquareConfig): { color: string; } {
+  let newSquare = { color: 'red', area: 100 }
+  if (config.color) {
+    newSquare.color = config.color
+  }
+  if (config.width) {
+    newSquare.area = config.width
+  }
+  return newSquare
+}
+let result = creatSquare({ color: 'red', width: 300 })
+console.log(result)
+
+// 接口的只读
+interface Readeronly {
+  readonly x: number,
+  readonly y: number
+}
+let p1: Readeronly = { x: 10, y: 20 }
+// p1.x = 5 // error x为只读
+
+let v: number[] = [1, 2, 3]
+let ro: ReadonlyArray<number> = v
+
+// 函数类型的接口
+interface SearchFunc {
+  (source: string, subString: string): boolean
+}
+let mySearch: SearchFunc
+mySearch = function (source: string, subString: string) {
+  let result = source.search(subString)
+  console.log(result)
+  return result > -1
+}
+// console.log(mySearch('11', '1'))
+// 函数的参数名不需要与接口里定义的名字相匹配
+// mySearch = function (sou: string, sub: string) {
+//   return true
+// }
+// 可索引的类型 TypeScript支持两种索引签名：字符串和数字
+interface StringArray {
+  [index: number]: string
+}
+let myArray: StringArray
+myArray = ['blob', 'fed']
+let myStr: string = myArray[0]
+console.log(myArray, myStr)

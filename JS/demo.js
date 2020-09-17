@@ -80,3 +80,61 @@ function error(message) {
 var someValue = "1";
 var stringLength = someValue.length;
 console.log(stringLength, typeof stringLength);
+// ts的结构
+var arraaa = [1, 2];
+var first = arraaa[0], second = arraaa[1];
+console.log(first, second);
+var testobj = {
+    a: 1,
+    b: '2'
+};
+function testhg(_a) {
+    var a = _a[0], b = _a[1];
+    console.log(a, b);
+}
+// testhg(arraaa)
+// 接口
+// 这只是一个函数的参数传递
+function printLabel(labelObj) {
+    console.log(labelObj);
+}
+var myObj = { size: 10, label: 'ts的接口' };
+printLabel(myObj);
+/*  LabelledValue接口就好比一个名字，用来描述上面例子里的要求。 它代表了有一个 label属性且类型为string的对象。
+ 需要注意的是，我们在这里并不能像在其它语言里一样，说传给 printLabel的对象实现了这个接口。我们只会去关注值的外形。
+  只要传入的对象满足上面提到的必要条件，那么它就是被允许的。**/
+function printLabel2(labelObj) {
+    console.log(labelObj);
+}
+var myObj2 = { size: 10, label: 'ts的接口' };
+printLabel2(myObj2);
+// function creatSquare(config: SquareConfig) {
+//   console.log(config)
+// }
+// creatSquare({})
+function creatSquare(config) {
+    var newSquare = { color: 'red', area: 100 };
+    if (config.color) {
+        newSquare.color = config.color;
+    }
+    if (config.width) {
+        newSquare.area = config.width;
+    }
+    return newSquare;
+}
+var result = creatSquare({ color: 'red', width: 300 });
+console.log(result);
+var p1 = { x: 10, y: 20 };
+// p1.x = 5 // error x为只读
+var v = [1, 2, 3];
+var ro = v;
+var mySearch;
+mySearch = function (source, subString) {
+    var result = source.search(subString);
+    console.log(result);
+    return result > -1;
+};
+var myArray;
+myArray = ['blob', 'fed'];
+var myStr = myArray[0];
+console.log(myArray, myStr);

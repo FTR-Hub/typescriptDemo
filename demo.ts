@@ -179,4 +179,5 @@ let myStr: string = myArray[0]
 console.log(myArray, myStr)
 
 
-let ftr: string = '1djsiodjoisa'
+
+let ftr: string = '123456788' 

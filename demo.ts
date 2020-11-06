@@ -177,3 +177,6 @@ let myArray: StringArray
 myArray = ['blob', 'fed']
 let myStr: string = myArray[0]
 console.log(myArray, myStr)
+
+
+let ftr: string = '1'
